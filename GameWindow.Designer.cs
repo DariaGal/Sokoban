@@ -1,6 +1,6 @@
 ﻿namespace Sokoban
 {
-    partial class Form1
+    partial class GameWindow
     {
         /// <summary>
         /// Required designer variable.
