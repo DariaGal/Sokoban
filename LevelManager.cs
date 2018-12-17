@@ -18,7 +18,6 @@ namespace Sokoban
             var mapString = new char[width, height];
             for(int x=0;x < width; x++)
             {
-
                 for(int y = 0; y< height; y++)
                 {
                     mapString[x, y] = split[x][y];

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sokoban
 {
-    class Wall
+    class Wall : ICell
     {
     }
 }
