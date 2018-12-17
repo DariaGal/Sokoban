@@ -49,6 +49,7 @@
     <Compile Include="CellAnimation.cs" />
     <Compile Include="Cells\Box.cs" />
     <Compile Include="Cells\EmptyCell.cs" />
+    <Compile Include="Directions.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="GameWindow.cs">
       <SubType>Form</SubType>

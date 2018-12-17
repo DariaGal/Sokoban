@@ -14,15 +14,16 @@ namespace Sokoban
             var file = new FileInfo(fileName);
 
             string str = File.ReadAllText(fileName);
-            var split = str.Split('\n');
-            int width = split.Length;
-            int height = split[0].Length;
+            var split = str.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            int width = split[0].Length;
+            int height = split.Length;
+
             var mapString = new char[width, height];
-            for(int x=0;x < width; x++)
+            for (int x = 0; x < width; x++)
             {
-                for(int y = 0; y< height; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    mapString[x, y] = split[x][y];
+                    mapString[x, y] = split[y][x];
                 }
             }
             return mapString;

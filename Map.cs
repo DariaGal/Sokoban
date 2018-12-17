@@ -9,6 +9,8 @@ namespace Sokoban
     class Map
     {
         private ICell[,] map;
+        private List<GoalCell> goals;
+
         public int Width { get; }
         public int Height { get; }
 
@@ -18,6 +20,31 @@ namespace Sokoban
             Width = width;
             Height = height;
             SetMap(mapString);
+        }
+
+        public Map(Map other)
+        {
+            map = other.map;
+            Width = other.Width;
+            Height = other.Height;
+
+        }
+
+        public void Move(Position from, Position to)
+        {
+            var cell = GetCell(from);
+            SetCell(to,cell);
+            SetCell(from, new EmptyCell());
+        }
+
+        public ICell GetCell(Position pos)
+        {
+            return map[pos.X, pos.Y];
+        }
+
+        public void SetCell(Position pos, ICell cell)
+        {
+            map[pos.X, pos.Y] = cell;
         }
 
         private void SetMap(char[,] mapString)
@@ -46,10 +73,6 @@ namespace Sokoban
                     }
                 }
             }
-        }
-        public void SetCell(Position pos, ICell cell)
-        {
-            map[pos.X, pos.Y] = cell;
         }
     }
 }
