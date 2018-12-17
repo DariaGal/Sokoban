@@ -12,11 +12,16 @@ namespace Sokoban
         public int Width { get; }
         public int Height { get; }
 
-        public Map(int width, int height)
+        public Map(int width, int height, char[,] mapString)
         {
             map = new ICell[width, height];
             Width = width;
             Height = height;
+        }
+
+        public void SetCell(Position pos, ICell cell)
+        {
+            map[pos.X, pos.Y] = cell;
         }
     }
 }
