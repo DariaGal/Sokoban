@@ -1,12 +1,26 @@
-﻿namespace Sokoban
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+
+namespace Sokoban
 {
-    partial class GameWindow
+    partial class GameWindow : Form
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        private readonly Dictionary<string, Bitmap> bitmaps = new Dictionary<string, Bitmap>();
+
+        public GameWindow(DirectoryInfo imagesDirectory = null)
+        {
+            if (imagesDirectory == null)
+                imagesDirectory = new DirectoryInfo("Images");
+            foreach (var e in imagesDirectory.GetFiles("*.png"))
+                bitmaps[e.Name] = (Bitmap)Image.FromFile(e.FullName);
+        }
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -18,6 +32,13 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.FillRectangle(
+                Brushes.Black, 0, 0, 32 * Game.MapWidth,
+                GameState.ElementSize * Game.MapHeight);
+           // base.OnPaint(e);
         }
 
         #region Windows Form Designer generated code
