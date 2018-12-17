@@ -9,8 +9,10 @@ namespace Sokoban
 {
     class LevelManager
     {
-        Map LoadLevel(string fileName)
+        public char[,] LoadLevel(string fileName)
         {
+            var file = new FileInfo(fileName);
+
             string str = File.ReadAllText(fileName);
             var split = str.Split('\n');
             int width = split.Length;
@@ -23,7 +25,7 @@ namespace Sokoban
                     mapString[x, y] = split[x][y];
                 }
             }
-            return new Map(width, height, mapString);
+            return mapString;
         }
     }
 }

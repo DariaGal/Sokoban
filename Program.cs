@@ -16,6 +16,9 @@ namespace Sokoban
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            var levelManager = new LevelManager();
+            var map = levelManager.LoadLevel();
             Application.Run(new GameWindow());
         }
     }

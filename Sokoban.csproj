@@ -46,9 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimationsState.cs" />
+    <Compile Include="CellAnimation.cs" />
     <Compile Include="Cells\Box.cs" />
     <Compile Include="Cells\EmptyCell.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="GameWindow.cs">
       <SubType>Form</SubType>
     </Compile>

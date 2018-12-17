@@ -1,0 +1,9 @@
+C:\Users\Daria\Desktop\контур\Sokoban\Sokoban\obj\Debug\Sokoban.csprojAssemblyReference.cache
+C:\Users\Daria\Desktop\контур\Sokoban\Sokoban\obj\Debug\Sokoban.Properties.Resources.resources
+C:\Users\Daria\Desktop\контур\Sokoban\Sokoban\obj\Debug\Sokoban.csproj.GenerateResource.cache
+C:\Users\Daria\Desktop\контур\Sokoban\Sokoban\obj\Debug\Sokoban.csproj.CoreCompileInputs.cache
+C:\Users\Daria\Desktop\контур\Sokoban\Sokoban\bin\Debug\Sokoban.exe.config
+C:\Users\Daria\Desktop\контур\Sokoban\Sokoban\bin\Debug\Sokoban.exe
+C:\Users\Daria\Desktop\контур\Sokoban\Sokoban\bin\Debug\Sokoban.pdb
+C:\Users\Daria\Desktop\контур\Sokoban\Sokoban\obj\Debug\Sokoban.exe
+C:\Users\Daria\Desktop\контур\Sokoban\Sokoban\obj\Debug\Sokoban.pdb
