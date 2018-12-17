@@ -46,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Box.cs" />
-    <Compile Include="EmptyCell.cs" />
+    <Compile Include="Cells\Box.cs" />
+    <Compile Include="Cells\EmptyCell.cs" />
     <Compile Include="GameWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,13 +55,14 @@
       <DependentUpon>GameWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Game.cs" />
-    <Compile Include="GoalCell.cs" />
-    <Compile Include="ICell.cs" />
+    <Compile Include="Cells\GoalCell.cs" />
+    <Compile Include="Cells\ICell.cs" />
+    <Compile Include="LevelManager.cs" />
     <Compile Include="Map.cs" />
-    <Compile Include="PlayerCell.cs" />
+    <Compile Include="Cells\PlayerCell.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wall.cs" />
+    <Compile Include="Cells\Wall.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -83,6 +84,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Box.png" />
+    <Content Include="Images\Empty.png" />
+    <Content Include="Images\Goal.png" />
+    <Content Include="Images\Player.png" />
+    <Content Include="Images\Wall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
