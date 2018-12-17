@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Sokoban
 {
@@ -16,10 +17,11 @@ namespace Sokoban
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            string levelPath = System.IO.Directory.GetCurrentDirectory()+"\\Levels\\1.txt";
             var levelManager = new LevelManager();
-            var map = levelManager.LoadLevel();
-            Application.Run(new GameWindow());
+            var map = levelManager.LoadLevel(levelPath);
+            var gameState = new GameState(map.GetLength(0),map.GetLength(1), map);
+            Application.Run(new GameWindow(gameState));
         }
     }
 }

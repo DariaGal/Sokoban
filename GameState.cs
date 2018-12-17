@@ -13,6 +13,14 @@ namespace Sokoban
         public int MapWidth;
         public int MapHeight;
         public List<CellAnimation> Animations = new List<CellAnimation>();
+        private Game game;
+
+        public GameState(int width, int height, char[,] map)
+        {
+            MapWidth = width;
+            MapHeight = height;
+            game = new Game(width, height, map);
+        }
 
         public void BeginAct()
         {
