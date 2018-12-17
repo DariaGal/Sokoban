@@ -11,6 +11,5 @@ namespace Sokoban
     {
         public string Name;
         public Point Location;
-        public Point Delta;
     }
 }
