@@ -10,23 +10,28 @@ namespace Sokoban
     {
         private Map map;
         private Position playerPosition;
+        private readonly List<Position> GoalPosition;
 
         public Game(int width, int height, char[,] mapString)
         {
             playerPosition = null;
+            GoalPosition = new List<Position>();
             map = new Map(width, height, mapString);
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
+                    if(map.GetCell(new Position(x, y)) is GoalCell)
+                    {
+                        GoalPosition.Add(new Position(x, y));
+                    }
+
                     if (map.GetCell(new Position(x, y)) is PlayerCell)
                     {
                         map.SetCell(new Position(x, y), new EmptyCell());
                         playerPosition = new Position(x, y);
-                        break;
                     }
                 }
-                if (playerPosition != null) break;
             }
         }
 
@@ -61,11 +66,7 @@ namespace Sokoban
                 return false;
             return true;
         }
-
-        public Map GetMap()
-        {
-            return new Map(map);
-        }
+        
         private Position GetNewPosition(Position pos, Directions direction)
         {
             switch (direction)
@@ -85,23 +86,30 @@ namespace Sokoban
         public string GetNameCell(Position pos)
         {
             var cell = map.GetCell(pos);
-            if (cell is EmptyCell)
-            {
-                if (playerPosition.X == pos.X && playerPosition.Y == pos.Y)
-                    return "Player";
-                else return "Empty";
-            }
-            if (cell is GoalCell)
-            {
-                if (playerPosition.X == pos.X && playerPosition.Y == pos.Y)
-                    return "PlayerOnGoal";
-                else return "Goal";
-            }
+           
             if (cell is Wall) return "Wall";
             if (cell is Box) return "Box";
-            if (cell is PlayerCell) return "Player";
 
-            return string.Empty;
+            if (playerPosition == pos && GoalPosition.Contains(pos))
+                return "PlayerOnGoal";
+            else if (playerPosition == pos)
+                return "Player";
+            else if (GoalPosition.Contains(pos))
+                return "Goal";
+
+            return "Empty";
+        }
+
+        public bool IsWin()
+        {
+            foreach(var pos in GoalPosition)
+            {
+                if(!(map.GetCell(pos) is Box))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
         
 

@@ -19,9 +19,11 @@ namespace Sokoban
         private GameState gameState;
         private int tickCount;
         public static Keys KeyPressed;
+        private bool gameEnd;
 
         public GameWindow(GameState gameState, DirectoryInfo imagesDirectory = null)
         {
+            gameEnd = false;
             ClientSize = new Size(
                 gameState.ElementSize * gameState.MapWidth,
                 gameState.ElementSize * gameState.MapHeight + gameState.ElementSize);
@@ -79,21 +81,24 @@ namespace Sokoban
                 gameState.ElementSize * gameState.MapHeight);
             foreach (var a in gameState.Animations)
                 e.Graphics.DrawImage(bitmaps[a.Name], a.Location);
-            e.Graphics.ResetTransform(); 
-            e.Graphics.DrawString(KeyPressed.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
+            e.Graphics.ResetTransform();
+            e.Graphics.DrawString(gameEnd.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
             // base.OnPaint(e);
         }
         private void TimerTick(object sender, EventArgs args)
         {
-          //  if (tickCount == 0) gameState.BeginAct();
-            gameState.Act();
-            /* foreach (var e in gameState.Animations)
-                 e.Location = new Point(e.Location.X, e.Location.Y);*/
-          /*  if (tickCount == 7)
-                gameState.EndAct();*/
-            tickCount++;
-            if (tickCount == 8) tickCount = 0;
-            Invalidate();
+            if (!gameEnd)
+            {
+                gameState.Act();
+                tickCount++;
+                if (tickCount == 8) tickCount = 0;
+                Invalidate();
+
+                if (gameState.EndGame())
+                {
+                    gameEnd = true;
+                }
+            }
         }
 
        /* private void SetDirection(Keys key)

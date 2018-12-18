@@ -35,7 +35,6 @@ namespace Sokoban
                     };
                 }
             }
-            
         }
 
         private void SetAnimations()
@@ -89,13 +88,12 @@ namespace Sokoban
         public void Act()
         {
             game.MakeStep(direction);
-            //  game.GetMap();
             SetAnimations();
             direction = Directions.None;
         }
-        public void EndAct()
+        public bool EndGame()
         {
-
+            return game.IsWin();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Sokoban
             X = x;
             Y = y;
         }
-     /*   public static bool operator ==(Position pos1, Position pos2)
+        public static bool operator ==(Position pos1, Position pos2)
         {
             return pos1.Equals(pos2);
         }
@@ -28,7 +28,7 @@ namespace Sokoban
         {
             var other = (Position)obj;
             return X == other.X && Y == other.Y;
-        }*/
+        }
 
     }
 }
