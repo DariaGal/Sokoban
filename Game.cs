@@ -35,17 +35,19 @@ namespace Sokoban
             }
         }
 
-        public void MakeStep(Directions direction)
+        public bool TryMakeStep(Directions direction)
         {
             if (direction != Directions.None)
             {
                 var newPos = GetNewPosition(playerPosition, direction);
 
                 if (map.GetCell(newPos) is Wall || IsOutOfMap(newPos))
+                {
                     newPos = playerPosition;
+                }
                 else if (map.GetCell(newPos) is Box)
                 {
-                    if(TryMoveBox(direction, newPos))
+                    if (TryMoveBox(direction, newPos))
                     {
                         var newBoxPos = GetNewPosition(newPos, direction);
                         map.Move(newPos, newBoxPos);
@@ -55,8 +57,12 @@ namespace Sokoban
                         newPos = playerPosition;
                     }
                 }
+                if (playerPosition == newPos)
+                    return false;
                 playerPosition = newPos;
+                return true;
             }
+            return false;
         }
 
         bool TryMoveBox(Directions direction, Position pos)

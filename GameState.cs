@@ -16,12 +16,14 @@ namespace Sokoban
         public CellAnimation[,] Animations;
         private Game game;
         private Directions direction;
+        public int StepCount;
 
         public GameState(int width, int height, char[,] map)
         {
             direction = Directions.None;
             MapWidth = width;
             MapHeight = height;
+            StepCount = 0;
             game = new Game(width, height, map);
             Animations = new CellAnimation[width, height];
             for (int x = 0; x < MapWidth; x++)
@@ -82,12 +84,13 @@ namespace Sokoban
             }
 
         }
-        public void BeginAct()
-        {
-        }
+
         public void Act()
         {
-            game.MakeStep(direction);
+            if(game.TryMakeStep(direction))
+            {
+                StepCount++;
+            }
             SetAnimations();
             direction = Directions.None;
         }

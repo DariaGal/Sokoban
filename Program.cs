@@ -17,7 +17,7 @@ namespace Sokoban
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            string levelPath = System.IO.Directory.GetCurrentDirectory()+"\\Levels\\2.txt";
+            string levelPath = System.IO.Directory.GetCurrentDirectory()+"\\Levels\\3.txt";
             var levelManager = new LevelManager();
             var map = levelManager.LoadLevel(levelPath);
             var gameState = new GameState(map.GetLength(0),map.GetLength(1), map);

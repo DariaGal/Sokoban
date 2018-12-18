@@ -82,7 +82,7 @@ namespace Sokoban
             foreach (var a in gameState.Animations)
                 e.Graphics.DrawImage(bitmaps[a.Name], a.Location);
             e.Graphics.ResetTransform();
-            e.Graphics.DrawString(gameEnd.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
+            e.Graphics.DrawString("Steps:"+gameState.StepCount.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
             // base.OnPaint(e);
         }
         private void TimerTick(object sender, EventArgs args)
