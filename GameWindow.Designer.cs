@@ -20,13 +20,15 @@ namespace Sokoban
         private int tickCount;
         public static Keys KeyPressed;
         private bool gameEnd;
+        Timer timer;
 
         public GameWindow(GameState gameState, DirectoryInfo imagesDirectory = null)
         {
+            InitializeComponent();
             gameEnd = false;
             ClientSize = new Size(
                 gameState.ElementSize * gameState.MapWidth,
-                gameState.ElementSize * gameState.MapHeight + gameState.ElementSize);
+                gameState.ElementSize * gameState.MapHeight + gameState.ElementSize*2);
             FormBorderStyle = FormBorderStyle.FixedDialog;
 
             if (imagesDirectory == null)
@@ -35,7 +37,7 @@ namespace Sokoban
                 bitmaps[Path.GetFileNameWithoutExtension(e.Name)] = (Bitmap)Image.FromFile(e.FullName);
             this.gameState = gameState;
 
-            var timer = new Timer();
+            timer = new Timer();
             timer.Interval = 50;
             timer.Tick += TimerTick;
             timer.Start();
@@ -77,13 +79,13 @@ namespace Sokoban
         {
             e.Graphics.TranslateTransform(0, gameState.ElementSize);
             e.Graphics.FillRectangle(
-                Brushes.Black, 0, 0, gameState.ElementSize * gameState.MapWidth,
+                Brushes.Black, 0, 32, gameState.ElementSize * gameState.MapWidth,
                 gameState.ElementSize * gameState.MapHeight);
             foreach (var a in gameState.Animations)
                 e.Graphics.DrawImage(bitmaps[a.Name], a.Location);
             e.Graphics.ResetTransform();
-            e.Graphics.DrawString("Steps:"+gameState.StepCount.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
-            // base.OnPaint(e);
+            e.Graphics.DrawString("Steps:"+gameState.StepCount.ToString(), new Font("Arial", 16), Brushes.Green, 0, 32);
+           
         }
         private void TimerTick(object sender, EventArgs args)
         {
@@ -99,57 +101,103 @@ namespace Sokoban
                     gameEnd = true;
                 }
             }
+            else
+            {
+                timer.Stop();
+                //var result = MessageBox.Show("YOU WIN", "",
+                //                 MessageBoxButtons.RetryCancel,
+                //                 MessageBoxIcon.Question);
+            }
         }
 
-       /* private void SetDirection(Keys key)
-        {
-            switch(key)
-            {
-                case Keys.Up:
-                    gameState.SetDirection(Directions.Up);
-                    break;
-                case Keys.Down:
-                    gameState.SetDirection(Directions.Down);
-                    break;
-                case Keys.Left:
-                    gameState.SetDirection(Directions.Left);
-                    break;
-                case Keys.Right:
-                    gameState.SetDirection(Directions.Right);
-                    break;
-                case Keys.W:
-                    gameState.SetDirection(Directions.Up);
-                    break;
-                case Keys.S:
-                    gameState.SetDirection(Directions.Down);
-                    break;
-                case Keys.A:
-                    gameState.SetDirection(Directions.Left);
-                    break;
-                case Keys.D:
-                    gameState.SetDirection(Directions.Right);
-                    break;
-                default:
-                    gameState.SetDirection(Directions.None);
-                    break;
-            }
-        }*/
-        /*
-        #region Windows Form Designer generated code
+        private MenuStrip menuStrip1;
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuToolStripMenuItem
+            // 
+            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.restartToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.menuToolStripMenuItem.Text = "Menu";
+            // 
+            // restartToolStripMenuItem
+            // 
+            this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.restartToolStripMenuItem.Text = "Restart";
+            this.restartToolStripMenuItem.Click += new System.EventHandler(this.restartToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // GameWindow
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "GameWindow";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
-        #endregion*/
+        private ToolStripMenuItem menuToolStripMenuItem;
+        private ToolStripMenuItem restartToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
+
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gameState.RestartGame();
+            timer.Start();
+            gameEnd = false;
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        /*
+#region Windows Form Designer generated code
+
+/// <summary>
+/// Required method for Designer support - do not modify
+/// the contents of this method with the code editor.
+/// </summary>
+private void InitializeComponent()
+{
+this.components = new System.ComponentModel.Container();
+this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+this.ClientSize = new System.Drawing.Size(800, 450);
+this.Text = "Form1";
+}
+
+#endregion*/
     }
 }
 

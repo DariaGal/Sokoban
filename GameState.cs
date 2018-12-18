@@ -13,6 +13,7 @@ namespace Sokoban
         public int ElementSize = 32;
         public int MapWidth;
         public int MapHeight;
+        public char[,] initialMap;
         public CellAnimation[,] Animations;
         private Game game;
         private Directions direction;
@@ -24,6 +25,8 @@ namespace Sokoban
             MapWidth = width;
             MapHeight = height;
             StepCount = 0;
+            initialMap = new char[width, height];
+            initialMap = map;
             game = new Game(width, height, map);
             Animations = new CellAnimation[width, height];
             for (int x = 0; x < MapWidth; x++)
@@ -33,7 +36,7 @@ namespace Sokoban
                     Animations[x, y] = new CellAnimation
                     {
                         Name = game.GetNameCell(new Position(x, y)),
-                        Location = new Point(x * ElementSize, y * ElementSize)
+                        Location = new Point(x * ElementSize, y * ElementSize + ElementSize)
                     };
                 }
             }
@@ -46,6 +49,24 @@ namespace Sokoban
                 for (int y = 0; y < MapHeight; y++)
                 {
                     Animations[x, y].Name = game.GetNameCell(new Position(x, y));
+                }
+            }
+        }
+
+        public void RestartGame()
+        {
+            StepCount = 0;
+            game = new Game(MapWidth, MapHeight, initialMap);
+            Animations = new CellAnimation[MapWidth, MapHeight];
+            for (int x = 0; x < MapWidth; x++)
+            {
+                for (int y = 0; y < MapHeight; y++)
+                {
+                    Animations[x, y] = new CellAnimation
+                    {
+                        Name = game.GetNameCell(new Position(x, y)),
+                        Location = new Point(x * ElementSize, y * ElementSize + ElementSize)
+                    };
                 }
             }
         }
