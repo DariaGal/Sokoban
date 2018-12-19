@@ -24,5 +24,14 @@ namespace Sokoban
             PlayerPosition = player;
             Goals = goals;
         }
+        public LevelInfo(LevelInfo level)
+        {
+            MapWidth = level.MapWidth;
+            MapHeight = level.MapHeight;
+            Name = level.Name;
+            Map = level.Map;
+            PlayerPosition = level.PlayerPosition;
+            Goals = level.Goals;
+        }
     }
 }
