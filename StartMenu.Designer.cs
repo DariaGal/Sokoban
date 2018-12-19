@@ -1,4 +1,6 @@
-﻿namespace Sokoban
+﻿using System.Windows.Forms;
+
+namespace Sokoban
 {
     partial class StartMenu
     {
@@ -52,6 +54,7 @@
             this.comboBoxLevels.Name = "comboBoxLevels";
             this.comboBoxLevels.Size = new System.Drawing.Size(121, 21);
             this.comboBoxLevels.TabIndex = 1;
+            this.comboBoxLevels.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
             // label
             // 
