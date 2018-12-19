@@ -58,6 +58,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Cells\GoalCell.cs" />
     <Compile Include="Cells\ICell.cs" />
+    <Compile Include="LevelInfo.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Cells\PlayerCell.cs" />
