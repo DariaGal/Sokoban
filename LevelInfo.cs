@@ -10,7 +10,15 @@ namespace Sokoban
     {
         public string Name { get; }
         public Map Map { get; }
-        Position Player { get; }
-        public List<Position> Goal { get; }
+        Position PlayerPosition { get; }
+        public List<Position> Goals { get; }
+
+        public LevelInfo(string name, Map map, Position player, List<Position> goals)
+        {
+            Name = name;
+            Map = map;
+            PlayerPosition = player;
+            Goals = goals;
+        }
     }
 }
