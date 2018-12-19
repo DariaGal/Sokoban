@@ -24,7 +24,8 @@ namespace Sokoban
                 comboBoxLevels.Items.Add(Path.GetFileNameWithoutExtension(file.Name));
                 levelManager.AddLevel(Path.GetFileNameWithoutExtension(file.Name), file);
             }
-            comboBoxLevels.SelectedItem = comboBoxLevels.Items[0];
+            if(comboBoxLevels.Items.Count > 0)
+                comboBoxLevels.SelectedItem = comboBoxLevels.Items[0];
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
