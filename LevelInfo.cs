@@ -10,6 +10,8 @@ namespace Sokoban
     {
         public string Name { get; }
         public ICell[,] Map { get; }
+        public int MapWidth { get; }
+        public int MapHeight { get; }
         Position PlayerPosition { get; }
         public List<Position> Goals { get; }
 
