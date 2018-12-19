@@ -9,11 +9,22 @@ namespace Sokoban
 {
     class LevelManager
     {
-        public char[,] LoadLevel(string fileName)
+        Dictionary<string, FileInfo> pathToLevels;
+        public LevelManager()
         {
-            var file = new FileInfo(fileName);
+            pathToLevels = new Dictionary<string, FileInfo>();
+        }
 
-            string str = File.ReadAllText(fileName);
+        public void AddLevel(string levelName, FileInfo file)
+        {
+            pathToLevels.Add(levelName, file);
+        }
+
+        public char[,] LoadLevel(string levelName)
+        {
+            var file = pathToLevels[levelName];
+
+            string str = File.ReadAllText(file.FullName);
             var split = str.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             int width = split[0].Length;
             int height = split.Length;

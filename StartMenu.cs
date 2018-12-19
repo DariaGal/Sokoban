@@ -13,12 +13,17 @@ namespace Sokoban
 {
     public partial class StartMenu : Form
     {
+        LevelManager levelManager;
         public StartMenu(string levelPath)
         {
             InitializeComponent();
+            levelManager = new LevelManager();
             var levelDirectory = new DirectoryInfo("Levels");
-            foreach (var e in levelDirectory.GetFiles("*.sokoban"))
-                comboBoxLevels.Items.Add(Path.GetFileNameWithoutExtension(e.Name));
+            foreach (var file in levelDirectory.GetFiles("*.sokoban"))
+            { 
+                comboBoxLevels.Items.Add(Path.GetFileNameWithoutExtension(file.Name));
+                levelManager.AddLevel(Path.GetFileNameWithoutExtension(file.Name), file);
+            }
             comboBoxLevels.SelectedItem = comboBoxLevels.Items[0];
         }
 
@@ -29,6 +34,18 @@ namespace Sokoban
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            var map = levelManager.LoadLevel(comboBoxLevels.SelectedItem.ToString());
+            var gameState = new GameState(map.GetLength(0), map.GetLength(1), map);
+            GameWindow gameWindow = new GameWindow(gameState);
+            // f2.FormClosing += delegate { f2_Closing(); };
+            gameWindow.FormClosing += delegate { MakeVisible(); };
+            this.Hide();
+            gameWindow.ShowDialog();
+        }
+
+        private void MakeVisible()
+        {
+            this.Visible = true;
         }
     }
 }
