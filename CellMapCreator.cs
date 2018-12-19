@@ -69,6 +69,8 @@ namespace Sokoban
                                 throw new Exception("Wrong Map, more then 1 player");
                             map[x, y] = new EmptyCell();
                             break;
+                        default:
+                            throw new Exception("Wrong map, unknown character");
                     }
                 }
             }
