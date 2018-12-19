@@ -20,7 +20,7 @@ namespace Sokoban
             pathToLevels.Add(levelName, file);
         }
 
-        public char[,] LoadLevel(string levelName)
+        public LevelInfo LoadLevel(string levelName)
         {
             var file = pathToLevels[levelName];
 
@@ -37,7 +37,10 @@ namespace Sokoban
                     mapString[x, y] = split[y][x];
                 }
             }
-            return mapString;
+
+            var mapCreator = new CellMapCreator(width, height, mapString);
+
+            return new LevelInfo(levelName, mapCreator.map, mapCreator.PlayerPosition, mapCreator.Goals);
         }
     }
 }

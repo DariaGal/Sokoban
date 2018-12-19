@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CellAnimation.cs" />
+    <Compile Include="CellMapCreator.cs" />
     <Compile Include="Cells\Box.cs" />
     <Compile Include="Cells\EmptyCell.cs" />
     <Compile Include="Directions.cs" />
