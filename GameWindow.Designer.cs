@@ -9,11 +9,6 @@ namespace Sokoban
 {
     partial class GameWindow : Form
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-       // private System.ComponentModel.IContainer components = null;
-       
         private readonly HashSet<Keys> pressedKeys = new HashSet<Keys>();
         private readonly Dictionary<string, Bitmap> bitmaps = new Dictionary<string, Bitmap>();
         private GameState gameState;
@@ -42,18 +37,6 @@ namespace Sokoban
             timer.Tick += TimerTick;
             timer.Start();
         }
-        /* /// <summary>
-         /// Clean up any resources being used.
-         /// </summary>
-         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-         protected override void Dispose(bool disposing)
-         {
-             if (disposing && (components != null))
-             {
-                 components.Dispose();
-             }
-             base.Dispose(disposing);
-         }*/
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -85,7 +68,14 @@ namespace Sokoban
                 e.Graphics.DrawImage(bitmaps[a.Name], a.Location);
             e.Graphics.ResetTransform();
             e.Graphics.DrawString("Steps:"+gameState.StepCount.ToString(), new Font("Arial", 16), Brushes.Green, 0, 32);
-           
+            if (gameEnd)
+            {
+                e.Graphics.FillRectangle(Brushes.Black, gameState.ElementSize * gameState.MapWidth / 2 - 82,
+                   (gameState.ElementSize * gameState.MapHeight + 100) / 2, 165, 25);
+                e.Graphics.DrawString("LEVEL PASSED", new Font("Arial", 16), Brushes.White,
+                    gameState.ElementSize * gameState.MapWidth / 2 - 82, (gameState.ElementSize * gameState.MapHeight + 100) / 2);
+            }
+
         }
         private void TimerTick(object sender, EventArgs args)
         {
@@ -104,6 +94,8 @@ namespace Sokoban
             else
             {
                 timer.Stop();
+                MessageBox.Show("Level passed! \nGo to menu to restart or exit", "SOKOBAN", MessageBoxButtons.OK);
+
             }
         }
 
@@ -179,22 +171,6 @@ namespace Sokoban
         {
             this.Close();
         }
-        /*
-#region Windows Form Designer generated code
-
-/// <summary>
-/// Required method for Designer support - do not modify
-/// the contents of this method with the code editor.
-/// </summary>
-private void InitializeComponent()
-{
-this.components = new System.ComponentModel.Container();
-this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-this.ClientSize = new System.Drawing.Size(800, 450);
-this.Text = "Form1";
-}
-
-#endregion*/
     }
 }
 
