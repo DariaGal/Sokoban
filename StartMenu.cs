@@ -37,7 +37,6 @@ namespace Sokoban
             var map = levelManager.LoadLevel(comboBoxLevels.SelectedItem.ToString());
             var gameState = new GameState(map.GetLength(0), map.GetLength(1), map);
             GameWindow gameWindow = new GameWindow(gameState);
-            // f2.FormClosing += delegate { f2_Closing(); };
             gameWindow.FormClosing += delegate { MakeVisible(); };
             this.Hide();
             gameWindow.ShowDialog();
