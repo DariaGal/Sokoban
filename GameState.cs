@@ -11,35 +11,23 @@ namespace Sokoban
     public class GameState
     {
         public int ElementSize = 32;
-        public int MapWidth;
-        public int MapHeight;
-        public char[,] initialMap;
         public CellAnimation[,] Animations;
+        private LevelInfo levelInfo;
+        public int MapWidth { get; }
+        public int MapHeight { get; }
         private Game game;
         private Directions direction;
         public int StepCount;
 
-        public GameState(int width, int height, char[,] map)
+        public GameState(LevelInfo lInfo)
         {
+            levelInfo = new LevelInfo(lInfo);
+            MapWidth = levelInfo.MapWidth;
+            MapHeight = levelInfo.MapHeight;
             direction = Directions.None;
-            MapWidth = width;
-            MapHeight = height;
             StepCount = 0;
-            initialMap = new char[width, height];
-            initialMap = map;
-            game = new Game(width, height, map);
-            Animations = new CellAnimation[width, height];
-            for (int x = 0; x < MapWidth; x++)
-            {
-                for (int y = 0; y < MapHeight; y++)
-                {
-                    Animations[x, y] = new CellAnimation
-                    {
-                        Name = game.GetNameCell(new Position(x, y)),
-                        Location = new Point(x * ElementSize, y * ElementSize + ElementSize)
-                    };
-                }
-            }
+            Animations = new CellAnimation[MapWidth, MapHeight];
+            InitGame();
         }
 
         private void SetAnimations()
@@ -53,11 +41,10 @@ namespace Sokoban
             }
         }
 
-        public void RestartGame()
+        private void InitGame()
         {
             StepCount = 0;
-            game = new Game(MapWidth, MapHeight, initialMap);
-            Animations = new CellAnimation[MapWidth, MapHeight];
+            game = new Game(levelInfo);
             for (int x = 0; x < MapWidth; x++)
             {
                 for (int y = 0; y < MapHeight; y++)
@@ -69,6 +56,10 @@ namespace Sokoban
                     };
                 }
             }
+        }
+        public void RestartGame()
+        {
+            InitGame();
         }
 
         public void SetDirection(Keys key)

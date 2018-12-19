@@ -12,27 +12,13 @@ namespace Sokoban
         private Position playerPosition;
         private readonly List<Position> GoalPosition;
 
-        public Game(int width, int height, char[,] mapString)
+        public Game(LevelInfo levelInfo)
         {
             playerPosition = null;
             GoalPosition = new List<Position>();
-            map = new Map(width, height, mapString);
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    if(map.GetCell(new Position(x, y)) is GoalCell)
-                    {
-                        GoalPosition.Add(new Position(x, y));
-                    }
-
-                    if (map.GetCell(new Position(x, y)) is PlayerCell)
-                    {
-                        map.SetCell(new Position(x, y), new EmptyCell());
-                        playerPosition = new Position(x, y);
-                    }
-                }
-            }
+            map = new Map(levelInfo.MapWidth,levelInfo.MapHeight,levelInfo.GetMap());
+            playerPosition = levelInfo.GetPlayerPosition();
+            GoalPosition = levelInfo.GetGoals();
         }
 
         public bool TryMakeStep(Directions direction)

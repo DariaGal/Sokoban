@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Sokoban
 {
-    class LevelInfo
+    public class LevelInfo
     {
         public string Name { get; }
-        public ICell[,] Map { get; }
         public int MapWidth { get; }
         public int MapHeight { get; }
-        Position PlayerPosition { get; }
-        public List<Position> Goals { get; }
+
+        private readonly Position PlayerPosition;
+        private readonly List<Position> Goals;
+        private readonly ICell[,] Map;
 
         public LevelInfo(string name, ICell[,] map, Position player, List<Position> goals)
         {
@@ -32,6 +33,18 @@ namespace Sokoban
             Map = level.Map;
             PlayerPosition = level.PlayerPosition;
             Goals = level.Goals;
+        }
+        public ICell[,] GetMap()
+        {
+            return (ICell[,])Map.Clone();
+        }
+        public List<Position> GetGoals()
+        {
+            return new List<Position>(Goals);
+        }
+        public Position GetPlayerPosition()
+        {
+            return new Position(PlayerPosition.X, PlayerPosition.Y);
         }
     }
 }

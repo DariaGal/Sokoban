@@ -34,8 +34,8 @@ namespace Sokoban
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            var map = levelManager.LoadLevel(comboBoxLevels.SelectedItem.ToString());
-            var gameState = new GameState(map.GetLength(0), map.GetLength(1), map);
+            var levelInfo = levelManager.LoadLevel(comboBoxLevels.SelectedItem.ToString());
+            var gameState = new GameState(levelInfo);
             GameWindow gameWindow = new GameWindow(gameState);
             gameWindow.FormClosing += delegate { MakeVisible(); };
             this.Hide();

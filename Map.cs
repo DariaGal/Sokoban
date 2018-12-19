@@ -9,17 +9,16 @@ namespace Sokoban
     class Map
     {
         private ICell[,] map;
-        private List<GoalCell> goals;
 
         public int Width { get; }
         public int Height { get; }
 
-        public Map(int width, int height, char[,] mapString)
+        public Map(int width, int height, ICell[,] map)
         {
-            map = new ICell[width, height];
             Width = width;
             Height = height;
-            SetMap(mapString);
+            this.map = new ICell[width, height];
+            this.map = map;
         }
 
         public Map(Map other)
@@ -27,7 +26,6 @@ namespace Sokoban
             map = other.map;
             Width = other.Width;
             Height = other.Height;
-
         }
 
         public void Move(Position from, Position to)
@@ -47,32 +45,5 @@ namespace Sokoban
             map[pos.X, pos.Y] = cell;
         }
 
-        private void SetMap(char[,] mapString)
-        {
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    switch (mapString[x, y])
-                    {
-                        case '-':
-                            map[x, y] = new EmptyCell();
-                            break;
-                        case '#':
-                            map[x, y] = new Wall();
-                            break;
-                        case '@':
-                            map[x, y] = new Box();
-                            break;
-                        case '*':
-                            map[x, y] = new GoalCell();
-                            break;
-                        case 'o':
-                            map[x, y] = new PlayerCell();
-                            break;
-                    }
-                }
-            }
-        }
     }
 }
