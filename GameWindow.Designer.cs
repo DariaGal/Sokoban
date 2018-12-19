@@ -104,9 +104,6 @@ namespace Sokoban
             else
             {
                 timer.Stop();
-                //var result = MessageBox.Show("YOU WIN", "",
-                //                 MessageBoxButtons.RetryCancel,
-                //                 MessageBoxIcon.Question);
             }
         }
 

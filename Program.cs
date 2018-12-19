@@ -17,11 +17,12 @@ namespace Sokoban
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            string levelPath = System.IO.Directory.GetCurrentDirectory()+"\\Levels\\1.txt";
+            Application.Run(new StartMenu(Directory.GetCurrentDirectory()));
+          /*  string levelPath = Directory.GetCurrentDirectory()+"\\Levels\\1.txt";
             var levelManager = new LevelManager();
             var map = levelManager.LoadLevel(levelPath);
             var gameState = new GameState(map.GetLength(0),map.GetLength(1), map);
-            Application.Run(new GameWindow(gameState));
+            Application.Run(new GameWindow(gameState));*/
         }
     }
 }
