@@ -57,12 +57,10 @@
       <DependentUpon>GameWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Game.cs" />
-    <Compile Include="Cells\GoalCell.cs" />
     <Compile Include="Cells\ICell.cs" />
     <Compile Include="LevelInfo.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="Map.cs" />
-    <Compile Include="Cells\PlayerCell.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,11 +10,4 @@ using System.Windows.Forms;
 
 namespace Sokoban
 {
-   /* public partial class GameWindow : Form
-    {
-        public GameWindow()
-        {
-            InitializeComponent();
-        }
-    }*/
 }

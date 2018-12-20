@@ -30,6 +30,8 @@ namespace Sokoban
         /// </summary>
         private void InitializeComponent()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.buttonStart = new System.Windows.Forms.Button();
             this.comboBoxLevels = new System.Windows.Forms.ComboBox();
             this.label = new System.Windows.Forms.Label();
